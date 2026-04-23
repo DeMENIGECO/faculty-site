@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Menu</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --purple: #7a68d8;
+  --lime: #c6ff00;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: var(--purple);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 12px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #0f0f14;
+  font-weight: bold;
+  padding: 12px;
+  background: var(--lime);
+  border-radius: 10px;
+}
+
+.close {
+  background: rgba(0,0,0,0.2);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+</style>
+</head>
+<body>
+
+<div class="menu">
+  <a href="#" onclick="goTo('index.html')"><i class="fa-solid fa-house"></i> Home</a>
+  <a href="#" onclick="goto('downloads.html')"><i class="fa-solid fa-download"></i> Downloads</a>
+  <a href="#"><i class="fa-solid fa-newspaper"></i> News</a>
+</div>
+
+<script>
+    function goTo(html) {
+        window.parent.location.href = html
+    }
+</script>
+</body>
+</html>

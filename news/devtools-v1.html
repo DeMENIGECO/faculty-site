@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Articolo: DevTools v1 - News - Faculty Editor</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --purple: #7a68d8;
+  --bg: #0f0f14;
+  --lime: #c6ff00;
+  --card: rgba(255,255,255,0.06);
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #1a1625, var(--bg));
+  color: white;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* 🌟 ULTIMA VERSIONE */
+.badge-latest {
+  background: rgba(198, 255, 0, 0.15);
+  color: var(--lime);
+  border-color: var(--lime);
+  box-shadow: 0 0 10px rgba(198,255,0,0.4);
+}
+
+/* 🧪 BETA */
+.badge-beta {
+  background: rgba(122, 104, 216, 0.2);
+  color: #cbbcff;
+  border-color: var(--purple);
+  box-shadow: 0 0 10px rgba(122,104,216,0.4);
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #7a68d8, #5c4bc7);
+  padding: 14px 18px;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 20px;
+  color: #0f0f14;
+  font-weight: 900;
+}
+
+/* LINKS DESKTOP */
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #0f0f14;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* PULSANTI */
+
+button {
+  background: linear-gradient(135deg, #c6ff00, #a8e600);
+  color: #0f0f14;
+  border: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 300px;
+  height: 100%;
+  background: #1a1625;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 999;
+}
+
+.overlay.show {
+  display: block;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 60px 20px 20px;
+}
+
+.hero h2 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+/* CARDS (RIPRISTINATE ✔) */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  padding: 40px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--lime);
+}
+
+.card h3 {
+  margin: 0 0 8px 0;
+  color: var(--lime);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+.release {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.release h2 {
+  margin-top: 0;
+  color: var(--lime);
+  font-size: 28px;
+}
+
+.release p {
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.changelog {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+
+  transition: 0.2s;
+}
+
+.item:hover {
+  transform: translateX(5px);
+  border-color: var(--lime);
+}
+
+.item span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.item button {
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="sidebar">
+  <iframe src="../menubar.html"></iframe>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h1>Faculty Editor</h1>
+
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../downloads.html">Downloads</a>
+    <a href="index.html">News</a>
+  </div>
+
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h2>News Faculty Editor</h2>
+  <p>Rimani aggiornato nel mondo di Faculty Editor</p>
+</div>
+
+
+<!--TITOLO RFE-->
+<div class="release">
+  <h2>DevTools v1</h2>
+  <p>
+    La versione 1 di Faculty Editor DevTools è stata rilasciata con il rilascio di <b>Faculty Editor 1.0.0</b> <button onclick="window.location.href = 'faculty-v100.html'">Leggi su Faculty Editor 1.0.0</button>.
+    Ecco le principali novità:
+  </p>
+
+  <div class="changelog">
+
+    <div class="item">
+      <span>Introdotti per la prima volta i DevTools</span>
+    </div>
+
+  </div>
+</div>
+<script>
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
+/* 🔥 FUNZIONI GLOBALI (IMPORTANTISSIMO PER IFRAME) */
+window.toggleMenu = function () {
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show");
+};
+
+window.closeMenu = function () {
+  sidebar.classList.remove("open");
+  overlay.classList.remove("show");
+};
+</script>
+
+</body>
+</html>

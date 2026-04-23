@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>News - Faculty Editor</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --purple: #7a68d8;
+  --bg: #0f0f14;
+  --lime: #c6ff00;
+  --card: rgba(255,255,255,0.06);
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #1a1625, var(--bg));
+  color: white;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* 🌟 ULTIMA VERSIONE */
+.badge-latest {
+  background: rgba(198, 255, 0, 0.15);
+  color: var(--lime);
+  border-color: var(--lime);
+  box-shadow: 0 0 10px rgba(198,255,0,0.4);
+}
+
+/* 🧪 BETA */
+.badge-beta {
+  background: rgba(122, 104, 216, 0.2);
+  color: #cbbcff;
+  border-color: var(--purple);
+  box-shadow: 0 0 10px rgba(122,104,216,0.4);
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #7a68d8, #5c4bc7);
+  padding: 14px 18px;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 20px;
+  color: #0f0f14;
+  font-weight: 900;
+}
+
+/* LINKS DESKTOP */
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #0f0f14;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* PULSANTI */
+
+button {
+  background: linear-gradient(135deg, #c6ff00, #a8e600);
+  color: #0f0f14;
+  border: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 300px;
+  height: 100%;
+  background: #1a1625;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 999;
+}
+
+.overlay.show {
+  display: block;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 60px 20px 20px;
+}
+
+.hero h2 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+/* CARDS (RIPRISTINATE ✔) */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  padding: 40px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--lime);
+}
+
+.card h3 {
+  margin: 0 0 8px 0;
+  color: var(--lime);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="sidebar">
+  <iframe src="../menubar.html"></iframe>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h1>Faculty Editor</h1>
+
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../downloads.html">Downloads</a>
+    <a href="index.html">News</a>
+  </div>
+
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h2>News Faculty Editor</h2>
+  <p>Rimani aggiornato nel mondo di Faculty Editor</p>
+</div>
+
+
+<!--TITOLO RFE-->
+<h2 align="center">Release Notes: Faculty Editor</h3>
+
+<!-- CARDS RFE -->
+<div class="cards">
+
+<!--Ultima versione: <span class="badge badge-latest">ULTIMA VERSIONE</span>-->
+<!--Beta: <span class="badge badge-beta">BETA</span></h3>-->
+  <div class="card">
+    <h3><i class="fa-solid fa-circle-info"></i> v1.0.2 <span class="badge badge-latest">ULTIMA VERSIONE</span></h3>
+    <p>Cosa c'è di nuovo in Faculty Editor 1.0.2?</p>
+    <button onclick="window.location.href = 'faculty-v102.html'">Leggi questo <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+
+  <div class="card">
+   <h3><i class="fa-solid fa-circle-info"></i> v1.0.1</h3>
+    <p>Cosa c'è di nuovo in Faculty Editor 1.0.1?</p>
+    <button onclick="window.location.href = 'faculty-v101.html'">Leggi questo <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+
+  <div class="card">
+   <h3><i class="fa-solid fa-circle-info"></i> v1.0.0</h3>
+    <p>Cosa c'è di nuovo in Faculty Editor 1.0.0?</p>
+    <button onclick="window.location.href = 'faculty-v100.html'">Leggi questo <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+</div>
+
+<!--TITOLO RFDE-->
+<h2 align="center">Release Notes: Faculty Editor DevTools</h3>
+
+<!-- CARDS RFDE -->
+<div class="cards">
+
+<!--Ultima versione: <span class="badge badge-latest">ULTIMA VERSIONE</span>-->
+<!--Beta: <span class="badge badge-beta">BETA</span></h3>-->
+  <div class="card">
+    <h3><i class="fa-solid fa-circle-info"></i> DevTools v3 <span class="badge badge-latest">ULTIMA VERSIONE</span></h3>
+    <p>Cosa c'è di nuovo in Faculty Editor DevTools 1.0.3?</p>
+    <button onclick="window.location.href = 'devtools-v3.html'">Leggi questo <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+
+  <div class="card">
+   <h3><i class="fa-solid fa-circle-info"></i> DevTools v2</h3>
+    <p>Cosa c'è di nuovo in Faculty Editor DevTools 2?</p>
+    <button onclick="window.location.href = 'devtools-v2.html'">Leggi questo <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+
+  <div class="card">
+   <h3><i class="fa-solid fa-circle-info"></i> DevTools v1</h3>
+    <p>Cosa c'è di nuovo in Faculty Editor DevTools 1?</p>
+    <button onclick="window.location.href = 'devtools-v1.html'">Leggi questo <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+</div>
+
+<!--TITOLO BEGINNERS-->
+<h2 align="center">Faculty Editor For Beginners</h3>
+
+<!-- CARDS BEGINNERS -->
+<div class="cards">
+
+<!--Ultima versione: <span class="badge badge-latest">ULTIMA VERSIONE</span>-->
+<!--Beta: <span class="badge badge-beta">BETA</span></h3>-->
+  <div class="card">
+    <h3><i class="fa-solid fa-user-graduate"></i> Introduzione a Faculty Editor</h3>
+    <p>Cos'è Faculty Editor? Cosa sono i DevTools? Queste e altre domande risposte se siente nuovi!</p>
+    <button onclick="window.location.href = 'beginners-intro.html'">Leggi questo <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+
+<script>
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
+/* 🔥 FUNZIONI GLOBALI (IMPORTANTISSIMO PER IFRAME) */
+window.toggleMenu = function () {
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show");
+};
+
+window.closeMenu = function () {
+  sidebar.classList.remove("open");
+  overlay.classList.remove("show");
+};
+</script>
+
+</body>
+</html>
